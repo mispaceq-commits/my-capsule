@@ -2,175 +2,555 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="CAPSULE // WHITE METAL EDITION — aerospace-grade aluminum vault for footwear.">
+    <meta name="theme-color" content="#e8e8eb">
     <title>CAPSULE // WHITE METAL EDITION</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;900&family=Rajdhani:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="loader">
-        <div class="loader-text">INITIALIZING SYSTEM...</div>
-        <div class="loader-bar"></div>
+    <!-- ========================================================
+         SCROLL PROGRESS BAR (tracks page read progress)
+         ======================================================== -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- ========================================================
+         LOADING SCREEN
+         ======================================================== -->
+    <div class="loader" id="pageLoader">
+        <div class="loader-text">INITIALIZING SYSTEM<span class="loader-dots"></span></div>
+        <div class="loader-bar"><span class="loader-bar-percent" id="loaderPercent">0%</span></div>
+        <div class="loader-status">BOOT SEQUENCE // AUTH OK // CAPSULE LINK READY</div>
     </div>
 
-   <nav class="hud-nav">
-    <div class="hud-logo">
-        <img src="image/Ресурс 1.png" alt="Capsule Logo">
-    </div>
-    <div class="hud-coords">SECURE SERVER // 127.0.0.1</div>
-    <div class="hud-menu-btn">MENU [ + ]</div>
-</nav>
+    <!-- ========================================================
+         HUD NAVIGATION (FIXED TOP BAR)
+         ======================================================== -->
+    <nav class="hud-nav">
+        <div class="hud-logo">
+            <a href="#sector-01" data-scroll>
+                <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943710/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81_1_h75prl.png" alt="Capsule Logo">
+            </a>
+        </div>
+        <div class="hud-coords">
+            <span class="dot-live"></span>
+            <span id="hudClock">SECURE SERVER // 127.0.0.1</span>
+        </div>
+        <button class="hud-menu-btn" id="menuToggle" aria-controls="mainMenu" aria-expanded="false">
+            <span class="hud-menu-label">MENU</span>
+            <span class="hud-menu-plus">[ + ]</span>
+        </button>
+    </nav>
 
-    <div class="noise-overlay"></div>
-    <div class="grid-lines">
+    <!-- ========================================================
+         FULLSCREEN MENU (OPENED FROM HUD)
+         ======================================================== -->
+    <div class="main-menu" id="mainMenu" aria-hidden="true">
+        <div class="main-menu-inner">
+            <ul class="main-menu-list">
+                <li><a href="#sector-01" data-scroll><span class="num">01</span>ARRIVAL</a></li>
+                <li><a href="#sector-02" data-scroll><span class="num">02</span>THE CLEAR</a></li>
+                <li><a href="#sector-03" data-scroll><span class="num">03</span>TECHNICAL DATA</a></li>
+                <li><a href="#sector-04" data-scroll><span class="num">04</span>PROTOCOL</a></li>
+                <li><a href="#sector-05" data-scroll><span class="num">05</span>PACKAGING</a></li>
+                <li><a href="#sector-06" data-scroll><span class="num">06</span>VISUAL RECORDS</a></li>
+                <li><a href="#sector-07" data-scroll><span class="num">07</span>LAB ARCHIVE</a></li>
+                <li><a href="#sector-08" data-scroll><span class="num">08</span>STATS</a></li>
+                <li><a href="#sector-09" data-scroll><span class="num">09</span>FIELD REPORTS</a></li>
+                <li><a href="#sector-10" data-scroll><span class="num">10</span>FAQ</a></li>
+                <li><a href="#sector-11" data-scroll><span class="num">11</span>PURCHASE</a></li>
+            </ul>
+            <div class="main-menu-footer">
+                <span>CAPSULE CORP. // WHITE METAL EDITION</span>
+                <span>© 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================
+         BACKGROUND VFX (noise + grid)
+         ======================================================== -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="grid-lines" aria-hidden="true">
         <div class="line v-line-1"></div>
         <div class="line v-line-2"></div>
         <div class="line v-line-3"></div>
     </div>
 
+    <!-- ========================================================
+         SECTOR 01 // HERO (SCROLL-SCRUBBED VIDEO)
+         ======================================================== -->
     <header class="hero-section" id="sector-01">
         <div class="hero-container">
             <div class="hero-data">
                 <span class="mono-text">MODEL: MK-IV</span>
                 <span class="mono-text">MAT: ALUMINUM</span>
+                <span class="mono-text">STATUS: ONLINE</span>
             </div>
-            
+
             <h1 class="giant-title">
-                <span class="outline-text">MOON 44
-                </span><br>
-                <span class="solid-text">ION 3</span><br>
+                <span class="outline-text">MOON 44</span><br>
+                <span class="solid-text">ION 3</span>
             </h1>
 
-<div class="hero-visual">
-    <video 
-        class="main-capsule-video" 
-        src="image/FUTURE2.mp4" 
-        autoplay
-        muted 
-        playsinline 
-        webkit-playsinline
-        preload="auto">
-        </video>
-</div>
+            <div class="hero-visual">
+                <video
+                    class="main-capsule-video"
+                    id="capsuleVideo"
+                    src="https://res.cloudinary.com/dnickckih/video/upload/v1776943229/FUTURE2_afbcr0.mp4"
+                    muted
+                    playsinline
+                    webkit-playsinline
+                    preload="auto"
+                    poster=""></video>
+                <div class="hero-visual-frame" aria-hidden="true">
+                    <span class="frame-tag top-left">CAM 01 / LIVE</span>
+                    <span class="frame-tag top-right">REC •</span>
+                    <span class="frame-tag bottom-left">FEED 4096x2160</span>
+                    <span class="frame-tag bottom-right" id="scrollHint">SCROLL ↓</span>
+                </div>
+            </div>
 
             <div class="hero-footer">
                 <p class="hero-desc">
-                    The ultimate defense against entropy. <br> 
+                    The ultimate defense against entropy.<br>
                     Keep your footwear in a state of suspended animation.
                 </p>
-                <a href="#sector-06" class="btn-brutalist">INITIATE ORDER</a>
+                <a href="#sector-11" class="btn-brutalist" data-scroll>INITIATE ORDER</a>
             </div>
         </div>
     </header>
-</header>
 
-
-   <section class="philosophy-section" id="sector-02" style="display: none;">
+    <!-- ========================================================
+         SECTOR 02 // PHILOSOPHY (THE CLEAR)
+         ======================================================== -->
+    <section class="philosophy-section" id="sector-02">
         <div class="split-layout">
-            <div class="text-block">
-                <h2 class="section-title">01 // THE CLEAR</h2>
+            <div class="text-block reveal">
+                <div class="section-tag">01 // MANIFESTO</div>
+                <h2 class="section-title">THE CLEAR</h2>
                 <p class="body-text">
-                    The world is dirty. Dust, bacteria, and moisture are the enemies of your collection. 
+                    The world is dirty. Dust, bacteria, and moisture are the enemies of your collection.
                     Standard cardboard boxes are weak. They fail.
                 </p>
                 <p class="body-text">
-                    We built a fortress. Inspired by orbital stations and military bunkers. 
+                    We built a fortress. Inspired by orbital stations and military bunkers.
                     <strong>This is not a box. This is armor.</strong>
                 </p>
+                <div class="inline-data">
+                    <span><em>99.9%</em>sterile</span>
+                    <span><em>6061-T6</em>alloy</span>
+                    <span><em>IP68</em>sealed</span>
+                </div>
             </div>
-            <div class="image-block glitch-effect">
-                <img src="image/HAND.png" alt="Metal Texture Detail">
-                <div class="image-caption">FIG. 2A: REINFORCED HINGES</div>
+            <div class="image-block reveal glitch-effect">
+                <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png" alt="Metal Texture Detail">
+                <div class="image-caption">FIG. 2A // REINFORCED HINGES</div>
             </div>
         </div>
     </section>
 
+    <!-- ========================================================
+         SECTOR 03 // TECHNICAL DATA
+         ======================================================== -->
     <section class="specs-section" id="sector-03">
         <div class="container-full">
+            <div class="section-tag center">02 // TECHNICAL</div>
             <h2 class="section-title center">TECHNICAL DATA</h2>
-            
+
             <div class="specs-grid">
-                <div class="spec-card">
+                <div class="spec-card reveal">
                     <div class="spec-icon">[ FE ]</div>
                     <h3>MATERIAL</h3>
-                    <p>Aerospace Grade Aluminum 6061. <br> Brushed Finish.</p>
+                    <p>Aerospace Grade Aluminum 6061.<br>Brushed Finish.</p>
+                    <span class="spec-meta">DENSITY 2.70 g/cm³</span>
                 </div>
-                
-                <div class="spec-card">
+
+                <div class="spec-card reveal">
                     <div class="spec-icon">[ UV ]</div>
                     <h3>PURIFICATION</h3>
-                    <p>Internal UV-C Emitters. <br> Eliminates 99.9% of biological threats.</p>
+                    <p>Internal UV-C Emitters.<br>Eliminates 99.9% of biological threats.</p>
+                    <span class="spec-meta">λ 265 nm</span>
                 </div>
 
-                <div class="spec-card">
+                <div class="spec-card reveal">
                     <div class="spec-icon">[ KG ]</div>
                     <h3>WEIGHT</h3>
-                    <p>Net Weight: 4.2 KG. <br> Heavy duty stability.</p>
+                    <p>Net Weight: 4.2 KG.<br>Heavy duty stability.</p>
+                    <span class="spec-meta">MAX LOAD 15 KG</span>
                 </div>
 
-                <div class="spec-card">
-                    <div class="spec-icon">[ 02 ]</div>
+                <div class="spec-card reveal">
+                    <div class="spec-icon">[ O2 ]</div>
                     <h3>AIRLOCK</h3>
-                    <p>Rubber gasket seal. <br> Nitrogen purge compatible.</p>
+                    <p>Rubber gasket seal.<br>Nitrogen purge compatible.</p>
+                    <span class="spec-meta">IP68 // -40°C</span>
+                </div>
+
+                <div class="spec-card reveal">
+                    <div class="spec-icon">[ PX ]</div>
+                    <h3>DISPLAY</h3>
+                    <p>Edge-lit ambient indicator.<br>12 preset moods.</p>
+                    <span class="spec-meta">RGB-W 8-bit</span>
+                </div>
+
+                <div class="spec-card reveal">
+                    <div class="spec-icon">[ ⚡ ]</div>
+                    <h3>POWER</h3>
+                    <p>USB-C PD 30W.<br>Standby 180 days.</p>
+                    <span class="spec-meta">5200 mAh</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="visual-break">
-        <img src="capsule_lifestyle.jpg" alt="Capsules in Room" class="bg-image">
-        <div class="overlay-text">
+    <!-- ========================================================
+         VISUAL BREAK (PARALLAX)
+         ======================================================== -->
+    <section class="visual-break" aria-hidden="false">
+        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943709/Gemini_Generated_Image_w10mb5w10mb5w10m_byeprd.png" alt="Capsule lifestyle" class="bg-image" data-parallax="0.25">
+        <div class="overlay-text reveal">
             <h2>STATIC<br>DEFENSE</h2>
+            <p>// IDLE MODE ENGAGED</p>
         </div>
     </section>
 
+    <!-- ========================================================
+         SECTOR 04 // PROTOCOL / HOW IT WORKS
+         ======================================================== -->
     <section class="steps-section" id="sector-04">
         <div class="container-narrow">
-            <div class="step-row">
+            <div class="section-tag">03 // OPERATIONAL PROTOCOL</div>
+            <h2 class="section-title">DEPLOYMENT STEPS</h2>
+
+            <div class="step-row reveal">
                 <div class="step-number">01</div>
                 <div class="step-content">
                     <h3>DEPLOY</h3>
                     <p>Open the magnetic latches. The hydraulic hinge assists the lift.</p>
                 </div>
             </div>
-            <div class="step-row">
+            <div class="step-row reveal">
                 <div class="step-number">02</div>
                 <div class="step-content">
                     <h3>LOAD</h3>
                     <p>Insert footwear. The internal base adjusts to size US 14.</p>
                 </div>
             </div>
-            <div class="step-row">
+            <div class="step-row reveal">
                 <div class="step-number">03</div>
                 <div class="step-content">
                     <h3>SEAL</h3>
                     <p>Close lid. Engage locks. Watch the pressure gauge stabilize.</p>
                 </div>
             </div>
+            <div class="step-row reveal">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>MONITOR</h3>
+                    <p>LED strip turns emerald when the climate is perfect. Red when it's not.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="gallery-section" id="sector-05">
-        <div class="gallery-header">
-            <h2>VISUAL_RECORDS</h2>
-        </div>
-        <div class="gallery-grid">
-            <div class="gal-item big"><img src="image/Gemini_Generated_Image_w10mb5w10mb5w10m.png" alt="Open View"></div>
-            <div class="gal-item small"><img src="image/detail_hand.png" alt="Detail 1"></div>
-            <div class="gal-item small"><img src="image/HAND.png" alt="Detail 2"></div>
-            <div class="gal-item wide"><img src="image/par2.png" alt="Wide View"></div>
+    <!-- ========================================================
+         SECTOR 05 // PACKAGING (3 USER IMAGES)
+         ======================================================== -->
+    <section class="packaging-section" id="sector-05">
+        <div class="container-full">
+            <div class="section-tag center">04 // PACKAGING</div>
+            <h2 class="section-title center">DELIVERY CAPSULE</h2>
+            <p class="section-lead center">
+                Each unit ships inside a serialized cargo shell. Three views below.
+            </p>
+
+            <div class="packaging-grid">
+                <!-- Лицевая сторона упаковки -->
+                <figure class="pack-card reveal">
+                    <div class="pack-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776944874/Packing_%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F_kdjbk0.jpg"
+                             alt="Packaging front view"
+                             loading="lazy">
+                    </div>
+                    <figcaption>
+                        <span class="pack-index">01</span>
+                        <span class="pack-title">FRONT / FACE</span>
+                        <span class="pack-meta">PRIMARY LABEL // SERIAL ZONE</span>
+                    </figcaption>
+                </figure>
+
+                <!-- Боковая сторона упаковки -->
+                <figure class="pack-card reveal">
+                    <div class="pack-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776944851/Packing_%D0%B1%D0%BE%D0%BA_b7fxde.jpg"
+                             alt="Packaging side view"
+                             loading="lazy">
+                    </div>
+                    <figcaption>
+                        <span class="pack-index">02</span>
+                        <span class="pack-title">SIDE / PROFILE</span>
+                        <span class="pack-meta">EDGE REINFORCEMENT // VENT</span>
+                    </figcaption>
+                </figure>
+
+                <!-- Задняя сторона упаковки -->
+                <figure class="pack-card reveal">
+                    <div class="pack-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776944869/Packing_back_ixgu56.jpg"
+                             alt="Packaging back view"
+                             loading="lazy">
+                    </div>
+                    <figcaption>
+                        <span class="pack-index">03</span>
+                        <span class="pack-title">BACK / REAR</span>
+                        <span class="pack-meta">CARGO MANIFEST // QR</span>
+                    </figcaption>
+                </figure>
+            </div>
         </div>
     </section>
-    
-<section class="flag-section">
+
+    <!-- ========================================================
+         SECTOR 06 // VISUAL RECORDS GALLERY
+         ======================================================== -->
+    <section class="gallery-section" id="sector-06">
+        <div class="gallery-header">
+            <div class="section-tag">05 // ARCHIVE</div>
+            <h2>VISUAL_RECORDS</h2>
+            <p class="section-lead">High-resolution stills from the R&amp;D bunker. Пролистай карусель ниже.</p>
+        </div>
+
+        <!--
+          Горизонтальная карусель фото:
+          - Каждый .gal-item рендерится в ряд, прокручивается свайпом / стрелками / кнопками.
+          - Клик по фото открывает его на весь экран (lightbox).
+          - Чтобы добавить новое фото — просто скопируй один <div class="gal-item"> и поменяй src / alt.
+        -->
+        <div class="gallery-carousel" data-carousel>
+            <button class="gal-nav gal-nav-prev" type="button"
+                    data-gal-prev aria-label="Предыдущее фото">&#9664;</button>
+
+            <div class="gallery-track" data-gallery-track>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943709/Gemini_Generated_Image_w10mb5w10mb5w10m_byeprd.png"
+                         alt="Open view of the capsule" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943714/detail_hand_ngvjxw.png"
+                         alt="Detail shot — hand on capsule handle" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png"
+                         alt="Close-up of the carry handle" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943737/par2_yvn9bp.png"
+                         alt="Wide shot of the capsule open" loading="lazy">
+                </div>
+            </div>
+
+            <button class="gal-nav gal-nav-next" type="button"
+                    data-gal-next aria-label="Следующее фото">&#9654;</button>
+
+            <div class="gal-progress" data-gal-progress aria-hidden="true">
+                <span class="gal-progress-fill" data-gal-progress-fill></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         SECTOR 07 // LAB ARCHIVE — PLACEHOLDER PHOTO SLOTS
+         ======================================================== -->
+    <!--
+      ПОДСКАЗКА ДЛЯ ВЛАДЕЛЬЦА САЙТА:
+      Ниже 6 пустых слотов под твои собственные фотографии.
+      Просто замени значение src="..." на ссылку на свою картинку
+      (можно использовать URL с Cloudinary, Imgur, свой CDN и т.д.).
+      Также обнови alt="..." и <figcaption> под каждый снимок.
+      Размер подхватится автоматически — каждая ячейка рендерится
+      как квадрат 1:1 с object-fit: cover.
+    -->
+    <section class="placeholder-gallery" id="sector-07">
+        <div class="container-full">
+            <div class="section-tag center">06 // LAB ARCHIVE</div>
+            <h2 class="section-title center">CUSTOM PHOTO SLOTS</h2>
+            <p class="section-lead center">
+                Шесть слотов под твои фотографии. Вставь свои ссылки в атрибут <code>src</code>.
+            </p>
+
+            <div class="placeholder-grid">
+
+                <!-- СЛОТ 01 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png"
+                             alt="Photo slot 01 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 01 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 01</figcaption>
+                </figure>
+
+                <!-- СЛОТ 02 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943714/detail_hand_ngvjxw.png"
+                             alt="Photo slot 02 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 02 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 02</figcaption>
+                </figure>
+
+                <!-- СЛОТ 03 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943737/par2_yvn9bp.png"
+                             alt="Photo slot 03 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 03 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 03</figcaption>
+                </figure>
+
+                <!-- СЛОТ 04 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943709/Gemini_Generated_Image_w10mb5w10mb5w10m_byeprd.png"
+                             alt="Photo slot 04 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 04 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 04</figcaption>
+                </figure>
+
+                <!-- СЛОТ 05 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png"
+                             alt="Photo slot 05 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 05 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 05</figcaption>
+                </figure>
+
+                <!-- СЛОТ 06 — ЗАМЕНИ src НА СВОЮ ССЫЛКУ НА ФОТО -->
+                <figure class="ph-card reveal">
+                    <div class="ph-image-wrap">
+                        <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943714/detail_hand_ngvjxw.png"
+                             alt="Photo slot 06 — replace with your image"
+                             loading="lazy">
+                        <span class="ph-overlay">SLOT 06 // REPLACE src</span>
+                    </div>
+                    <figcaption>CUSTOM PHOTO 06</figcaption>
+                </figure>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         SECTOR 08 // ANIMATED STATS / COUNTERS
+         ======================================================== -->
+    <section class="stats-section" id="sector-08">
+        <div class="container-full">
+            <div class="section-tag">07 // METRICS</div>
+            <h2 class="section-title">SYSTEM READOUT</h2>
+
+            <div class="stats-grid">
+                <div class="stat reveal">
+                    <div class="stat-num" data-target="1287" data-suffix="+">0</div>
+                    <div class="stat-label">UNITS DEPLOYED</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-num" data-target="99" data-suffix="%">0</div>
+                    <div class="stat-label">STERILE INTEGRITY</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-num" data-target="42" data-suffix="">0</div>
+                    <div class="stat-label">COUNTRIES ACTIVE</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-num" data-target="24" data-suffix="/7">0</div>
+                    <div class="stat-label">UPLINK MONITORING</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         SECTOR 09 // FIELD REPORTS (TESTIMONIALS)
+         ======================================================== -->
+    <section class="reports-section" id="sector-09">
+        <div class="container-full">
+            <div class="section-tag center">08 // FIELD REPORTS</div>
+            <h2 class="section-title center">OPERATOR TRANSMISSIONS</h2>
+
+            <div class="reports-grid">
+                <blockquote class="report reveal">
+                    <p>“After 6 months my grails look like they just left the box. Zero yellowing.”</p>
+                    <cite>— AGENT //K-09, Tokyo</cite>
+                </blockquote>
+                <blockquote class="report reveal">
+                    <p>“The UV purge is not a gimmick. My collection smells like nothing. That's the point.”</p>
+                    <cite>— AGENT //M-21, Berlin</cite>
+                </blockquote>
+                <blockquote class="report reveal">
+                    <p>“Hydraulic hinge, magnetic latch, aluminum core. They actually engineered this.”</p>
+                    <cite>— AGENT //S-04, Sochi</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         SECTOR 10 // FAQ (ACCORDION)
+         ======================================================== -->
+    <section class="faq-section" id="sector-10">
+        <div class="container-narrow">
+            <div class="section-tag">09 // FAQ</div>
+            <h2 class="section-title">PROTOCOL QUESTIONS</h2>
+
+            <div class="faq-list">
+                <details class="faq-item reveal">
+                    <summary>How large are the internal dimensions?</summary>
+                    <p>Internal bay fits US 14 / EU 48. Removable riser allows two smaller pairs stacked.</p>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>Is the UV-C emitter safe?</summary>
+                    <p>Lid-sealed interlock. The lamp only fires when the latch contact is closed.</p>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>What's the battery runtime?</summary>
+                    <p>5200 mAh internal cell. ~180 days standby, ~30 days of hourly UV cycles.</p>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>How do I clean the exterior?</summary>
+                    <p>Microfiber and isopropyl 70%. Avoid abrasives on the brushed finish.</p>
+                </details>
+                <details class="faq-item reveal">
+                    <summary>Do you ship internationally?</summary>
+                    <p>Currently CIS, EU, UK, JP, US. Contact ops for other zones.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         FLAG / LEGAL STRIP
+         ======================================================== -->
+    <section class="flag-section">
         <div class="flag-wrapper">
-            <img src="image/Flag_of_the_United_States.svg.png" alt="American Flag" class="flag-img">
-            
+            <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943606/Flag_of_the_United_States.svg_vaoxfa.png" alt="American Flag" class="flag-img">
+
             <div class="legal-info">
                 <span class="legal-row">DESIGNED IN SOCHI // ASSEMBLED IN GOLIKOV</span>
                 <span class="legal-row">© 2026 CAPSULE CORP. ALL RIGHTS RESERVED.</span>
@@ -179,44 +559,86 @@
         </div>
     </section>
 
-    <section class="purchase-section" id="sector-06">
-        <div class="purchase-container">
-            <div class="purchase-card">
-                <div class="card-header">
-                    <h3>SINGLE UNIT</h3>
-                    <div class="price">$1499.00</div>
-                </div>
-                <ul class="features-list">
-                    <li>1x Aluminum Vault</li>
-                    <li>1x Power Cable (USB-C)</li>
-                    <li>Manual Override Key</li>
-                </ul>
-                <button class="btn-buy">ADD TO CART</button>
-            </div>
+    <!-- ========================================================
+         SECTOR 11 // PURCHASE / PRICING
+         ======================================================== -->
+    <section class="purchase-section" id="sector-11">
+        <div class="container-full">
+            <div class="section-tag center light">10 // ACQUISITION</div>
+            <h2 class="section-title center light">INITIATE ORDER</h2>
 
-            <div class="purchase-card highlight">
-                <div class="badge">BEST VALUE</div>
-                <div class="card-header">
-                    <h3>SQUADRON PACK</h3>
-                    <div class="price">$1899.00</div>
+            <div class="purchase-container">
+                <div class="purchase-card reveal">
+                    <div class="card-header">
+                        <h3>SINGLE UNIT</h3>
+                        <div class="price">$1499.00</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>1x Aluminum Vault</li>
+                        <li>1x Power Cable (USB-C)</li>
+                        <li>Manual Override Key</li>
+                        <li>Global 24-month warranty</li>
+                    </ul>
+                    <button class="btn-buy" type="button">ADD TO CART</button>
                 </div>
-                <ul class="features-list">
-                    <li>3x Aluminum Vaults</li>
-                    <li>Modular Connectors</li>
-                    <li>Priority Shipping</li>
-                </ul>
-                <button class="btn-buy filled">ADD TO CART</button>
+
+                <div class="purchase-card highlight reveal">
+                    <div class="badge">BEST VALUE</div>
+                    <div class="card-header">
+                        <h3>SQUADRON PACK</h3>
+                        <div class="price">$1899.00</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>3x Aluminum Vaults</li>
+                        <li>Modular Connectors</li>
+                        <li>Priority Shipping</li>
+                        <li>Engraved Serial Plate</li>
+                    </ul>
+                    <button class="btn-buy filled" type="button">ADD TO CART</button>
+                </div>
+
+                <div class="purchase-card reveal">
+                    <div class="card-header">
+                        <h3>FLEET BLACK</h3>
+                        <div class="price">$4599.00</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>8x Aluminum Vaults</li>
+                        <li>Nitrogen Purge Adapter</li>
+                        <li>Wall Mount Rack</li>
+                        <li>Lifetime Service</li>
+                    </ul>
+                    <button class="btn-buy" type="button">ADD TO CART</button>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- ========================================================
+         NEWSLETTER / FINAL CTA
+         ======================================================== -->
+    <section class="cta-section">
+        <div class="container-narrow">
+            <h2 class="section-title">UPLINK TO OPS</h2>
+            <p class="body-text">Mission updates. No spam. Unsubscribe with one click.</p>
+            <form class="cta-form" id="ctaForm" novalidate>
+                <input type="email" name="email" placeholder="your@transmission.link" required>
+                <button type="submit" class="btn-brutalist">TRANSMIT</button>
+            </form>
+            <div class="cta-status" id="ctaStatus" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
     <footer class="main-footer">
         <div class="footer-top">
             <h2 class="footer-logo">CAPSULE</h2>
             <div class="socials">
-                <a href="#">INSTAGRAM</a>
-                <a href="#">TWITTER</a>
-                <a href="#">DISCORD</a>
+                <a href="#" aria-label="Instagram">INSTAGRAM</a>
+                <a href="#" aria-label="Twitter">TWITTER</a>
+                <a href="#" aria-label="Discord">DISCORD</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -224,78 +646,26 @@
                 WARNING: UNAUTHORIZED REPLICATION OF THIS DESIGN IS A VIOLATION OF INTERGALACTIC LAW.
             </div>
             <div class="credits">
-                DESIGNED IN 2026. SYSTEM READY.
+                DESIGNED IN <span id="footerYear">2026</span>. SYSTEM READY.
             </div>
         </div>
     </footer>
 
+    <!-- Scroll-to-top control -->
+    <button class="to-top" id="toTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const video = document.querySelector(".main-capsule-video");
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        
-        // Функция запуска анимации
-        function initVideoScroll() {
-            if (video.dataset.scrollInitialized) return;
-            video.dataset.scrollInitialized = "true";
-
-            // Убедимся, что длительность видео определена (иначе берем наугад 10 сек, но лучше реальную)
-            const videoDuration = video.duration || 10;
-
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".hero-section",
-                    start: "top top",
-                    end: isMobile ? "+=1200" : "+=4000", // На телефоне короче путь
-                    pin: !isMobile, // Фиксация только на десктопе
-                    scrub: isMobile ? 1.2 : 3, // На телефоне быстрее и легче
-                }
-            });
-
-            // === ГЛАВНОЕ ИЗМЕНЕНИЕ ===
-            // Мы анимируем свойство currentTime у самого видео через GSAP
-            // Это позволяет GSAP самому просчитывать инерцию (scrub)
-            tl.fromTo(video, 
-                { 
-                    currentTime: 0 
-                }, 
-                { 
-                    currentTime: videoDuration, 
-                    ease: "none" // Важно: линейная скорость без ускорений
-                }
-            );
-            
-            ScrollTrigger.refresh();
-        }
-
-        // ПРОВЕРКА ГОТОВНОСТИ ВИДЕО
-        if (video) {
-            if (video.readyState >= 1) {
-                initVideoScroll();
-            } else {
-                video.addEventListener("loadedmetadata", initVideoScroll);
-            }
-        }
-
-        // Анимация появления элементов (оставляем как было)
-        const revealElements = document.querySelectorAll('.step-row, .text-block, .spec-card, .purchase-card');
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            const elementVisible = 100;
-            revealElements.forEach((el) => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add("active");
-                }
-            });
-        };
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll();
-    });
-</script>
+    <!-- Site behavior -->
+    <script src="script.js"></script>
+</body>
 </html>
