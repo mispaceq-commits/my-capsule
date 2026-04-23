@@ -38,9 +38,93 @@
         initHeroVideoScroll();
         initParallax();
         initCounters();
+        initGalleryCarousel();
         initLightbox();
         initCtaForm();
         initFooterYear();
+    }
+
+    /* ------------------------------------------------------
+     * Gallery carousel — horizontal scroll with prev/next
+     * buttons, progress bar, keyboard + drag support.
+     * ------------------------------------------------------ */
+    function initGalleryCarousel() {
+        const carousel = qs('[data-carousel]');
+        if (!carousel) return;
+        const track    = qs('[data-gallery-track]', carousel);
+        const prev     = qs('[data-gal-prev]', carousel);
+        const next     = qs('[data-gal-next]', carousel);
+        const progress = qs('[data-gal-progress-fill]', carousel);
+        if (!track) return;
+
+        function stepSize() {
+            const first = track.firstElementChild;
+            if (!first) return track.clientWidth;
+            const style = getComputedStyle(track);
+            const gap   = parseFloat(style.columnGap || style.gap) || 0;
+            return first.getBoundingClientRect().width + gap;
+        }
+
+        function updateUI() {
+            const max = track.scrollWidth - track.clientWidth;
+            const pct = max > 0 ? (track.scrollLeft / max) * 100 : 100;
+            if (progress) {
+                const fillWidth = Math.max(15, Math.min(100, (track.clientWidth / track.scrollWidth) * 100));
+                progress.style.width = fillWidth + '%';
+                progress.style.transform = 'translateX(' + (pct * (100 - fillWidth) / 100) + '%)';
+            }
+            if (prev) prev.disabled = track.scrollLeft <= 2;
+            if (next) next.disabled = track.scrollLeft >= max - 2;
+        }
+
+        if (prev) prev.addEventListener('click', () => {
+            track.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+        });
+        if (next) next.addEventListener('click', () => {
+            track.scrollBy({ left: stepSize(), behavior: 'smooth' });
+        });
+
+        track.addEventListener('scroll', updateUI, { passive: true });
+        window.addEventListener('resize', updateUI);
+
+        // Keyboard navigation when carousel is in focus
+        carousel.setAttribute('tabindex', '0');
+        carousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft')  { e.preventDefault(); track.scrollBy({ left: -stepSize(), behavior: 'smooth' }); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left:  stepSize(), behavior: 'smooth' }); }
+        });
+
+        // Mouse drag-to-scroll (desktop). Touch already works via native overflow.
+        let isDown = false;
+        let startX = 0;
+        let startScroll = 0;
+        let dragDist = 0;
+        let dragTarget = null;
+        track.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX;
+            startScroll = track.scrollLeft;
+            dragDist = 0;
+            dragTarget = e.target.closest('.gal-item');
+            track.classList.add('is-dragging');
+        });
+        window.addEventListener('mouseup', () => {
+            if (isDown && dragDist > 6 && dragTarget) {
+                // Tell the click handler to skip the lightbox open
+                dragTarget.dataset.justDragged = '1';
+            }
+            isDown = false;
+            dragTarget = null;
+            track.classList.remove('is-dragging');
+        });
+        track.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            dragDist = Math.abs(e.pageX - startX);
+            track.scrollLeft = startScroll - (e.pageX - startX);
+        });
+
+        updateUI();
     }
 
     /* ------------------------------------------------------
@@ -372,10 +456,24 @@
             img.src = '';
         }
 
-        const selectors = '.gal-item img, .pack-image-wrap img, .ph-image-wrap img';
-        qsa(selectors).forEach(node => {
+        // Packaging + placeholder: click goes directly to the <img>
+        qsa('.pack-image-wrap img, .ph-image-wrap img').forEach(node => {
             node.style.cursor = 'zoom-in';
             node.addEventListener('click', () => open(node.src, node.alt));
+        });
+
+        // Gallery carousel: click the wrapper .gal-item so drag handlers don't
+        // swallow the event; find the <img> inside and open its src.
+        qsa('.gal-item').forEach(wrap => {
+            wrap.addEventListener('click', (e) => {
+                // ignore if the user just dragged
+                if (wrap.dataset.justDragged === '1') {
+                    wrap.dataset.justDragged = '0';
+                    return;
+                }
+                const im = wrap.querySelector('img');
+                if (im) open(im.src, im.alt);
+            });
         });
 
         close.addEventListener('click', closeBox);

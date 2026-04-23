@@ -324,13 +324,44 @@
         <div class="gallery-header">
             <div class="section-tag">05 // ARCHIVE</div>
             <h2>VISUAL_RECORDS</h2>
-            <p class="section-lead">High-resolution stills from the R&amp;D bunker.</p>
+            <p class="section-lead">High-resolution stills from the R&amp;D bunker. Пролистай карусель ниже.</p>
         </div>
-        <div class="gallery-grid">
-            <div class="gal-item big reveal"><img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943709/Gemini_Generated_Image_w10mb5w10mb5w10m_byeprd.png" alt="Open View" loading="lazy"></div>
-            <div class="gal-item small reveal"><img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943714/detail_hand_ngvjxw.png" alt="Detail 1" loading="lazy"></div>
-            <div class="gal-item small reveal"><img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png" alt="Detail 2" loading="lazy"></div>
-            <div class="gal-item wide reveal"><img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943737/par2_yvn9bp.png" alt="Wide View" loading="lazy"></div>
+
+        <!--
+          Горизонтальная карусель фото:
+          - Каждый .gal-item рендерится в ряд, прокручивается свайпом / стрелками / кнопками.
+          - Клик по фото открывает его на весь экран (lightbox).
+          - Чтобы добавить новое фото — просто скопируй один <div class="gal-item"> и поменяй src / alt.
+        -->
+        <div class="gallery-carousel" data-carousel>
+            <button class="gal-nav gal-nav-prev" type="button"
+                    data-gal-prev aria-label="Предыдущее фото">&#9664;</button>
+
+            <div class="gallery-track" data-gallery-track>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943709/Gemini_Generated_Image_w10mb5w10mb5w10m_byeprd.png"
+                         alt="Open view of the capsule" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943714/detail_hand_ngvjxw.png"
+                         alt="Detail shot — hand on capsule handle" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943721/HAND_nngern.png"
+                         alt="Close-up of the carry handle" loading="lazy">
+                </div>
+                <div class="gal-item reveal">
+                    <img src="https://res.cloudinary.com/dnickckih/image/upload/v1776943737/par2_yvn9bp.png"
+                         alt="Wide shot of the capsule open" loading="lazy">
+                </div>
+            </div>
+
+            <button class="gal-nav gal-nav-next" type="button"
+                    data-gal-next aria-label="Следующее фото">&#9654;</button>
+
+            <div class="gal-progress" data-gal-progress aria-hidden="true">
+                <span class="gal-progress-fill" data-gal-progress-fill></span>
+            </div>
         </div>
     </section>
 
