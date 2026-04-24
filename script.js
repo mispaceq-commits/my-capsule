@@ -255,6 +255,47 @@
         }
     })();
 
+    /* ---------- Contact popups (TG / IG account picker) ---------- */
+    (function popups() {
+        const triggers = document.querySelectorAll('[data-popup]');
+        const backdrops = document.querySelectorAll('.popup-backdrop');
+        if (!triggers.length) return;
+
+        function open(id) {
+            const bd = document.getElementById('popup-' + id);
+            if (!bd) return;
+            bd.hidden = false;
+            // next frame so transition kicks in
+            requestAnimationFrame(() => bd.classList.add('is-open'));
+            document.body.style.overflow = 'hidden';
+        }
+        function close(bd) {
+            bd.classList.remove('is-open');
+            document.body.style.overflow = '';
+            setTimeout(() => { bd.hidden = true; }, 300);
+        }
+
+        triggers.forEach((t) => {
+            t.addEventListener('click', (e) => {
+                e.preventDefault();
+                open(t.dataset.popup);
+            });
+        });
+
+        backdrops.forEach((bd) => {
+            bd.addEventListener('click', (e) => {
+                if (e.target === bd || e.target.classList.contains('popup-close')) {
+                    close(bd);
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            backdrops.forEach((bd) => { if (!bd.hidden) close(bd); });
+        });
+    })();
+
     /* ---------- Nav shadow on scroll ---------- */
     (function navShadow() {
         const nav = document.querySelector('.nav');
