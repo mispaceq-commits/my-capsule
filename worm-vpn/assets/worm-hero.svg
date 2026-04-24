@@ -1,0 +1,39 @@
+<svg width="100%" height="100%" viewBox="0 0 380 480" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="skinBase" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff0f5" /> <stop offset="40%" stop-color="#ffb6c1" /> <stop offset="80%" stop-color="#d47b8f" /> <stop offset="100%" stop-color="#803e4d" /> </linearGradient>
+
+        <linearGradient id="visorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#444" />
+            <stop offset="50%" stop-color="#0a0a0a" />
+            <stop offset="100%" stop-color="#000" />
+        </linearGradient>
+    </defs>
+
+    <path d="M 120 450 
+             C 40 380, 50 220, 110 120 
+             C 140 70, 200 60, 240 80 
+             C 310 110, 330 250, 290 380 
+             C 270 450, 180 480, 120 450 Z" 
+          fill="url(#skinBase)" />
+
+    <path d="M 100 160 Q 180 200 280 155" fill="none" stroke="#a35467" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 100 164 Q 180 204 280 159" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+    <path d="M 80 230 Q 180 280 300 220" fill="none" stroke="#a35467" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 80 235 Q 180 285 300 225" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+
+    <path d="M 65 300 Q 180 360 310 290" fill="none" stroke="#a35467" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 65 306 Q 180 366 310 296" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+
+    <path d="M 75 380 Q 180 430 295 370" fill="none" stroke="#803e4d" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    <path d="M 75 387 Q 180 437 295 377" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+    <path d="M 130 110 Q 180 130 230 100 C 240 120, 220 140, 180 140 C 140 140, 120 120, 130 110 Z" fill="url(#visorGrad)"/>
+    <path d="M 145 115 Q 175 125 205 112" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+    <path d="M 165 150 Q 180 155 190 148" fill="none" stroke="#803e4d" stroke-width="3" stroke-linecap="round"/>
+
+    <path d="M 90 200 C 70 260, 70 320, 100 380 C 110 350, 90 260, 100 200 Z" fill="#ffffff" opacity="0.5" filter="blur(4px)"/>
+    <ellipse cx="230" cy="190" rx="15" ry="40" fill="#ffffff" opacity="0.4" transform="rotate(-30 230 190)" filter="blur(3px)"/>
+</svg>
