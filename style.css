@@ -1308,8 +1308,8 @@ section {
 
     .nav { gap: 16px; padding: 14px 18px; }
     .nav-links { display: none; }
-    .nav-cta { margin-left: auto; padding: 8px 14px; font-size: 13px; }
-    .nav-burger { display: block; }
+    .nav-cta { display: none; }
+    .nav-burger { display: block; margin-left: auto; }
 
     .feature-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
