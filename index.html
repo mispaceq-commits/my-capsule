@@ -1,301 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPSULE // WHITE METAL EDITION</title>
-    
+    <title>Червяк VPN — Проползём куда угодно</title>
+    <meta name="description" content="Червяк VPN — жирный, гладкий и невероятно скользкий VPN. Пророем тайный подземный ход к любому контенту.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;900&family=Rajdhani:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="loader">
-        <div class="loader-text">INITIALIZING SYSTEM...</div>
-        <div class="loader-bar"></div>
+    <!-- Gooey SVG filter used across the site to merge blobs/worms smoothly -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix"
+                    values="1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 22 -10" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+            <filter id="slime-drip">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+            </filter>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ff5599" stop-opacity="0.85" />
+                <stop offset="60%" stop-color="#ff2a75" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+            </radialGradient>
+        </defs>
+    </svg>
+
+    <!-- Custom slime cursor -->
+    <div class="slime-cursor" aria-hidden="true"></div>
+    <div class="slime-cursor-dot" aria-hidden="true"></div>
+
+    <!-- Floating blobs background -->
+    <div class="blob-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
     </div>
 
-   <nav class="hud-nav">
-    <div class="hud-logo">
-        <img src="image/Ресурс 1.png" alt="Capsule Logo">
-    </div>
-    <div class="hud-coords">SECURE SERVER // 127.0.0.1</div>
-    <div class="hud-menu-btn">MENU [ + ]</div>
-</nav>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">
+            <span class="logo-worm">🪱</span>
+            <span class="logo-text">Червяк<span class="logo-accent">VPN</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Фишки</a></li>
+            <li><a href="#tunnels">Тоннели</a></li>
+            <li><a href="#pricing">Тарифы</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+        <a href="#pricing" class="nav-cta">Копать за <b>149₽</b></a>
+        <button class="nav-burger" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
 
-    <div class="noise-overlay"></div>
-    <div class="grid-lines">
-        <div class="line v-line-1"></div>
-        <div class="line v-line-2"></div>
-        <div class="line v-line-3"></div>
-    </div>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-dirt"></div>
 
-    <header class="hero-section" id="sector-01">
-        <div class="hero-container">
-            <div class="hero-data">
-                <span class="mono-text">MODEL: MK-IV</span>
-                <span class="mono-text">MAT: ALUMINUM</span>
-            </div>
-            
-            <h1 class="giant-title">
-                <span class="outline-text">MOON 44
-                </span><br>
-                <span class="solid-text">ION 3</span><br>
-            </h1>
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Уже в 64 странах · без логов
+                </div>
 
-<div class="hero-visual">
-    <video 
-        class="main-capsule-video" 
-        src="image/FUTURE2.mp4" 
-        autoplay
-        muted 
-        playsinline 
-        webkit-playsinline
-        preload="auto">
-        </video>
-</div>
+                <h1 class="hero-title">
+                    <span class="title-line title-fat" data-text="Проползём">Проползём</span>
+                    <span class="title-line title-thin">куда</span>
+                    <span class="title-line title-goo" data-text="угодно.">угодно.</span>
+                </h1>
 
-            <div class="hero-footer">
-                <p class="hero-desc">
-                    The ultimate defense against entropy. <br> 
-                    Keep your footwear in a state of suspended animation.
+                <p class="hero-sub">
+                    Быстрый, жирный и невероятно гладкий VPN.
+                    Никаких блокировок, логов и тормозов.
+                    Мы пророем тайный подземный ход к любому контенту в интернете.
                 </p>
-                <a href="#sector-06" class="btn-brutalist">INITIATE ORDER</a>
+
+                <div class="hero-actions">
+                    <a href="#pricing" class="btn btn-primary">
+                        <span>Начать копать</span>
+                        <span class="btn-slime"></span>
+                    </a>
+                    <a href="#features" class="btn btn-ghost">
+                        <span>Как это работает?</span>
+                    </a>
+                </div>
+
+                <ul class="hero-meta">
+                    <li><b>AES-256</b><span>шифрование</span></li>
+                    <li><b>0 логов</b><span>строго</span></li>
+                    <li><b>10 Гбит/с</b><span>на сервер</span></li>
+                </ul>
             </div>
+
+            <div class="hero-visual" data-tilt>
+                <div class="worm-shadow"></div>
+                <div class="worm-glow"></div>
+                <img class="hero-worm" src="assets/worm-hero.svg" alt="Жирный червяк в очках">
+                <div class="slime-drip slime-drip-1"></div>
+                <div class="slime-drip slime-drip-2"></div>
+                <div class="slime-drip slime-drip-3"></div>
+
+                <!-- floating orbiting chips -->
+                <div class="orbit-chip chip-speed">💨 0 мс лага</div>
+                <div class="orbit-chip chip-lock">🔒 Без логов</div>
+                <div class="orbit-chip chip-globe">🌍 64 страны</div>
+            </div>
+        </div>
+
+        <!-- Wavy tunnel divider -->
+        <div class="tunnel-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+                <path d="M0,96 C240,160 480,16 720,64 C960,112 1200,144 1440,64 L1440,160 L0,160 Z" fill="var(--soil-2)"/>
+            </svg>
         </div>
     </header>
-</header>
 
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-head">
+                <span class="kicker">// Почему Червяк</span>
+                <h2 class="section-title">Три причины <em>закопаться</em> в интернет</h2>
+            </div>
 
-   <section class="philosophy-section" id="sector-02" style="display: none;">
-        <div class="split-layout">
-            <div class="text-block">
-                <h2 class="section-title">01 // THE CLEAR</h2>
-                <p class="body-text">
-                    The world is dirty. Dust, bacteria, and moisture are the enemies of your collection. 
-                    Standard cardboard boxes are weak. They fail.
+            <div class="feature-grid">
+                <article class="feature-card card-speed">
+                    <div class="feature-emoji">💨</div>
+                    <h3>Скользит как по маслу</h3>
+                    <p>
+                        Наши серверы смазаны лучшим пингом. Видео грузятся мгновенно,
+                        а игры не лагают. Червяк гарантирует максимальную скорость.
+                    </p>
+                    <div class="feature-meter">
+                        <div class="meter-fill" data-target="96"></div>
+                        <span class="meter-val">96%</span>
+                    </div>
+                    <span class="feature-tag">до 10 Гбит/с</span>
+                </article>
+
+                <article class="feature-card card-wall">
+                    <div class="feature-emoji">🧱</div>
+                    <h3>Подкапывает стены</h3>
+                    <p>
+                        Instagram, Netflix, Twitter? Для нас нет глухих стен.
+                        Мы пророем гладкий ход под любой государственной блокировкой.
+                    </p>
+                    <div class="wall-animation">
+                        <div class="wall"></div>
+                        <div class="tunnel-line"></div>
+                        <div class="mini-worm">🪱</div>
+                    </div>
+                    <span class="feature-tag">обход DPI</span>
+                </article>
+
+                <article class="feature-card card-deep">
+                    <div class="feature-emoji">🕵️‍♂️</div>
+                    <h3>Глубоко под землёй</h3>
+                    <p>
+                        Шифрование AES-256. Твои данные спрятаны так глубоко в грязи,
+                        что их не найдет ни один провайдер. Строго без логов.
+                    </p>
+                    <div class="depth-bars" aria-hidden="true">
+                        <div class="depth-bar"></div>
+                        <div class="depth-bar"></div>
+                        <div class="depth-bar"></div>
+                        <div class="depth-bar"></div>
+                    </div>
+                    <span class="feature-tag">AES-256 · no logs</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- TUNNELS / HOW IT WORKS -->
+    <section class="tunnels" id="tunnels">
+        <div class="container">
+            <div class="section-head">
+                <span class="kicker">// Как червяк копает</span>
+                <h2 class="section-title">Путь <em>сквозь грунт</em> за 3 движения</h2>
+            </div>
+
+            <div class="tunnel-map">
+                <svg class="tunnel-path" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+                    <path id="tunnel-curve"
+                          d="M 40 60
+                             C 200 60, 260 200, 420 200
+                             S 640 60, 800 200
+                             S 1040 340, 1160 220"
+                          fill="none"
+                          stroke="url(#tunnelGrad)"
+                          stroke-width="28"
+                          stroke-linecap="round"/>
+                    <path d="M 40 60
+                             C 200 60, 260 200, 420 200
+                             S 640 60, 800 200
+                             S 1040 340, 1160 220"
+                          fill="none"
+                          stroke="#1a0710"
+                          stroke-width="14"
+                          stroke-linecap="round"
+                          stroke-dasharray="2 14"/>
+                    <defs>
+                        <linearGradient id="tunnelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#6a1a2d"/>
+                            <stop offset="50%" stop-color="#ff3377"/>
+                            <stop offset="100%" stop-color="#00e5ff"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <div class="crawling-worm" aria-hidden="true">🪱</div>
+
+                <ol class="tunnel-steps">
+                    <li>
+                        <div class="step-num">01</div>
+                        <h4>Заглотить ссылку</h4>
+                        <p>Тыкаешь «Соединить» — червяк втягивает твой трафик в свою мягкую пасть.</p>
+                    </li>
+                    <li>
+                        <div class="step-num">02</div>
+                        <h4>Пройти сквозь грунт</h4>
+                        <p>Данные едут по слизистому тоннелю, зашифрованные AES-256. Никто не подглядит.</p>
+                    </li>
+                    <li>
+                        <div class="step-num">03</div>
+                        <h4>Вылезти в любой стране</h4>
+                        <p>Червяк вылезает там, где тебе надо: США, Япония, Германия — выбирай.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-head">
+                <span class="kicker">// Тарифы</span>
+                <h2 class="section-title">Выбери <em>своего червяка</em></h2>
+                <p class="section-lead">
+                    От маленького юркого дождевика до жирного короля подземелья.
+                    Все тарифы — со строгим отсутствием логов и гарантией возврата 7 дней.
                 </p>
-                <p class="body-text">
-                    We built a fortress. Inspired by orbital stations and military bunkers. 
-                    <strong>This is not a box. This is armor.</strong>
+            </div>
+
+            <div class="plans">
+                <article class="plan plan-small">
+                    <div class="plan-mascot">
+                        <img src="assets/worm-glasses.svg" alt="">
+                    </div>
+                    <div class="plan-name">Червячок</div>
+                    <p class="plan-tag">Для пробы грунта</p>
+                    <div class="plan-price">
+                        <span class="price-val">149</span>
+                        <span class="price-cur">₽</span>
+                        <span class="price-per">/ мес</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li>1 устройство</li>
+                        <li>5 подземных серверов</li>
+                        <li>Скорость до 100 Мбит/с</li>
+                        <li>Базовое шифрование AES-256</li>
+                        <li>Поддержка через чат</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-ghost plan-btn">Взять червячка</a>
+                </article>
+
+                <article class="plan plan-pro popular">
+                    <div class="plan-badge">🔥 Большинство копают это</div>
+                    <div class="plan-mascot">
+                        <img src="assets/worm-hero.svg" alt="">
+                    </div>
+                    <div class="plan-name">Жирный</div>
+                    <p class="plan-tag">Для настоящих копателей</p>
+                    <div class="plan-price">
+                        <span class="price-val">349</span>
+                        <span class="price-cur">₽</span>
+                        <span class="price-per">/ мес</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li>5 устройств одновременно</li>
+                        <li>50 серверов в 32 странах</li>
+                        <li>Скорость <b>до 1 Гбит/с</b></li>
+                        <li>Стелс-режим против DPI</li>
+                        <li>Приоритетный саппорт 24/7</li>
+                        <li>Kill Switch + Split Tunneling</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary plan-btn">Стать жирным</a>
+                </article>
+
+                <article class="plan plan-king">
+                    <div class="plan-mascot">
+                        <img src="assets/worm-drool.svg" alt="">
+                    </div>
+                    <div class="plan-name">Король тоннелей</div>
+                    <p class="plan-tag">Подземная империя</p>
+                    <div class="plan-price">
+                        <span class="price-val">599</span>
+                        <span class="price-cur">₽</span>
+                        <span class="price-per">/ мес</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li>∞ устройств</li>
+                        <li>Все 200+ серверов во всех странах</li>
+                        <li>Скорость <b>до 10 Гбит/с</b></li>
+                        <li>Двойной VPN + выход через Tor</li>
+                        <li>Выделенный IP по желанию</li>
+                        <li>Личный менеджер-червяк</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-ghost plan-btn">Взойти на трон</a>
+                </article>
+            </div>
+
+            <p class="plans-foot">🛡️ 7 дней гарантии возврата · Оплата картой, СБП, крипта</p>
+        </div>
+    </section>
+
+    <!-- STATS / SOIL STRIP -->
+    <section class="stats" aria-label="Статистика">
+        <div class="container stats-grid">
+            <div class="stat"><b>200+</b><span>подземных серверов</span></div>
+            <div class="stat"><b>64</b><span>страны в меню</span></div>
+            <div class="stat"><b>1.2M</b><span>довольных копателей</span></div>
+            <div class="stat"><b>0</b><span>сохранённых логов</span></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container contact-inner">
+            <div class="contact-copy">
+                <span class="kicker">// Связь с червяками</span>
+                <h2 class="section-title">Напиши нам в <em>любую нору</em></h2>
+                <p>
+                    Живая поддержка 24/7. Пишите — ответим быстрее, чем червяк успеет
+                    проскользнуть сквозь метр грунта. Никаких ботов первой линии.
                 </p>
-            </div>
-            <div class="image-block glitch-effect">
-                <img src="image/HAND.png" alt="Metal Texture Detail">
-                <div class="image-caption">FIG. 2A: REINFORCED HINGES</div>
-            </div>
-        </div>
-    </section>
 
-    <section class="specs-section" id="sector-03">
-        <div class="container-full">
-            <h2 class="section-title center">TECHNICAL DATA</h2>
-            
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <div class="spec-icon">[ FE ]</div>
-                    <h3>MATERIAL</h3>
-                    <p>Aerospace Grade Aluminum 6061. <br> Brushed Finish.</p>
-                </div>
-                
-                <div class="spec-card">
-                    <div class="spec-icon">[ UV ]</div>
-                    <h3>PURIFICATION</h3>
-                    <p>Internal UV-C Emitters. <br> Eliminates 99.9% of biological threats.</p>
-                </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">[ KG ]</div>
-                    <h3>WEIGHT</h3>
-                    <p>Net Weight: 4.2 KG. <br> Heavy duty stability.</p>
-                </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">[ 02 ]</div>
-                    <h3>AIRLOCK</h3>
-                    <p>Rubber gasket seal. <br> Nitrogen purge compatible.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="visual-break">
-        <img src="capsule_lifestyle.jpg" alt="Capsules in Room" class="bg-image">
-        <div class="overlay-text">
-            <h2>STATIC<br>DEFENSE</h2>
-        </div>
-    </section>
-
-    <section class="steps-section" id="sector-04">
-        <div class="container-narrow">
-            <div class="step-row">
-                <div class="step-number">01</div>
-                <div class="step-content">
-                    <h3>DEPLOY</h3>
-                    <p>Open the magnetic latches. The hydraulic hinge assists the lift.</p>
-                </div>
-            </div>
-            <div class="step-row">
-                <div class="step-number">02</div>
-                <div class="step-content">
-                    <h3>LOAD</h3>
-                    <p>Insert footwear. The internal base adjusts to size US 14.</p>
-                </div>
-            </div>
-            <div class="step-row">
-                <div class="step-number">03</div>
-                <div class="step-content">
-                    <h3>SEAL</h3>
-                    <p>Close lid. Engage locks. Watch the pressure gauge stabilize.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="gallery-section" id="sector-05">
-        <div class="gallery-header">
-            <h2>VISUAL_RECORDS</h2>
-        </div>
-        <div class="gallery-grid">
-            <div class="gal-item big"><img src="image/Gemini_Generated_Image_w10mb5w10mb5w10m.png" alt="Open View"></div>
-            <div class="gal-item small"><img src="image/detail_hand.png" alt="Detail 1"></div>
-            <div class="gal-item small"><img src="image/HAND.png" alt="Detail 2"></div>
-            <div class="gal-item wide"><img src="image/par2.png" alt="Wide View"></div>
-        </div>
-    </section>
-    
-<section class="flag-section">
-        <div class="flag-wrapper">
-            <img src="image/Flag_of_the_United_States.svg.png" alt="American Flag" class="flag-img">
-            
-            <div class="legal-info">
-                <span class="legal-row">DESIGNED IN SOCHI // ASSEMBLED IN GOLIKOV</span>
-                <span class="legal-row">© 2026 CAPSULE CORP. ALL RIGHTS RESERVED.</span>
-                <span class="legal-row">PATENT PENDING: US-99402-X</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="purchase-section" id="sector-06">
-        <div class="purchase-container">
-            <div class="purchase-card">
-                <div class="card-header">
-                    <h3>SINGLE UNIT</h3>
-                    <div class="price">$1499.00</div>
-                </div>
-                <ul class="features-list">
-                    <li>1x Aluminum Vault</li>
-                    <li>1x Power Cable (USB-C)</li>
-                    <li>Manual Override Key</li>
+                <ul class="contact-list">
+                    <li>
+                        <a href="https://t.me/chervyak_vpn" target="_blank" rel="noopener" class="contact-link tg">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 3.5 2.5 11.2c-1.2.5-1.2 1.2 0 1.6l5 1.5 11.6-7.3c.5-.3 1-.2.6.2L9.9 15.8l-.4 5.5c.4 0 .6-.2.9-.5l2.1-2 4.3 3.2c.8.4 1.4.2 1.6-.7L22.8 4.8c.3-1.2-.4-1.7-1.3-1.3Z"/></svg>
+                            <div>
+                                <b>Telegram</b>
+                                <span>@chervyak_vpn</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/chervyak.vpn" target="_blank" rel="noopener" class="contact-link ig">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.2-3.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>
+                            <div>
+                                <b>Instagram</b>
+                                <span>@chervyak.vpn</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/79998887766" target="_blank" rel="noopener" class="contact-link wa">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A10 10 0 0 0 3.9 17.1L2 22l5-1.9a10 10 0 0 0 13.5-16.6Zm-8.4 15.3a8 8 0 0 1-4.1-1.1l-.3-.2-3 1 1-2.9-.2-.3a8 8 0 1 1 14.5-4.7 8 8 0 0 1-8 8.2Zm4.6-5.9c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.1-.5 0c-1-.4-2-1-3-2.3-.3-.5.3-.5.8-1.5 0-.1 0-.3-.1-.4-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.8 4.2 1.8.7 2.5.8 3.3.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.4Z"/></svg>
+                            <div>
+                                <b>WhatsApp</b>
+                                <span>+7 999 888-77-66</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://discord.gg/chervyak" target="_blank" rel="noopener" class="contact-link dc">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A17.8 17.8 0 0 0 16 3l-.2.4c1.5.4 2.8.9 4 1.6a16 16 0 0 0-15.7 0c1.2-.7 2.5-1.2 4-1.6L7.8 3a17.8 17.8 0 0 0-4.3 1.4C.8 8.7 0 12.8 0 16.8l.1.1A17.8 17.8 0 0 0 5.4 19l1-1.4a11 11 0 0 1-1.8-.9c.1-.1.3-.2.4-.3a12.6 12.6 0 0 0 14 0l.4.3a11 11 0 0 1-1.8.9l1 1.4a17.8 17.8 0 0 0 5.4-2.1v-.1c0-4.6-.9-8.6-3.3-12.4ZM8 14.6c-1 0-1.9-1-1.9-2.2 0-1.2.8-2.2 1.9-2.2s1.9 1 1.9 2.2c0 1.2-.8 2.2-1.9 2.2Zm8 0c-1 0-1.9-1-1.9-2.2 0-1.2.8-2.2 1.9-2.2s1.9 1 1.9 2.2c0 1.2-.8 2.2-1.9 2.2Z"/></svg>
+                            <div>
+                                <b>Discord</b>
+                                <span>discord.gg/chervyak</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:hi@chervyak.vpn" class="contact-link mail">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.7 2L12 12.3 19.3 7H4.7ZM20 8.4l-7.4 5.4a1 1 0 0 1-1.2 0L4 8.4V17h16V8.4Z"/></svg>
+                            <div>
+                                <b>Почта</b>
+                                <span>hi@chervyak.vpn</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
-                <button class="btn-buy">ADD TO CART</button>
             </div>
 
-            <div class="purchase-card highlight">
-                <div class="badge">BEST VALUE</div>
-                <div class="card-header">
-                    <h3>SQUADRON PACK</h3>
-                    <div class="price">$1899.00</div>
-                </div>
-                <ul class="features-list">
-                    <li>3x Aluminum Vaults</li>
-                    <li>Modular Connectors</li>
-                    <li>Priority Shipping</li>
-                </ul>
-                <button class="btn-buy filled">ADD TO CART</button>
-            </div>
+            <form class="contact-form" onsubmit="return false;">
+                <h3>Оставить заявку на тоннель</h3>
+                <label>
+                    <span>Как тебя звать, копатель?</span>
+                    <input type="text" name="name" placeholder="Имя" required>
+                </label>
+                <label>
+                    <span>Куда отправить ссылку?</span>
+                    <input type="email" name="email" placeholder="you@chervyak.vpn" required>
+                </label>
+                <label>
+                    <span>Что хочешь пролезть?</span>
+                    <textarea name="msg" rows="3" placeholder="Netflix, Instagram, игры..."></textarea>
+                </label>
+                <button type="submit" class="btn btn-primary">
+                    <span>Прокопать ход</span>
+                    <span class="btn-slime"></span>
+                </button>
+                <p class="form-note">Отвечаем в течение 5 минут 🪱</p>
+            </form>
         </div>
     </section>
 
-    <footer class="main-footer">
-        <div class="footer-top">
-            <h2 class="footer-logo">CAPSULE</h2>
-            <div class="socials">
-                <a href="#">INSTAGRAM</a>
-                <a href="#">TWITTER</a>
-                <a href="#">DISCORD</a>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo footer-logo">
+                    <span class="logo-worm">🪱</span>
+                    <span class="logo-text">Червяк<span class="logo-accent">VPN</span></span>
+                </div>
+                <p>Скользкий, жирный, неудержимый. Прокопаем интернет для тебя.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Продукт</h5>
+                <a href="#features">Возможности</a>
+                <a href="#tunnels">Как работает</a>
+                <a href="#pricing">Тарифы</a>
+            </div>
+            <div class="footer-col">
+                <h5>Клиенты</h5>
+                <a href="#">Windows</a>
+                <a href="#">macOS</a>
+                <a href="#">iOS · Android</a>
+                <a href="#">Расширение Chrome</a>
+            </div>
+            <div class="footer-col">
+                <h5>Норы</h5>
+                <a href="https://t.me/chervyak_vpn">Telegram</a>
+                <a href="https://instagram.com/chervyak.vpn">Instagram</a>
+                <a href="https://discord.gg/chervyak">Discord</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="warning-text">
-                WARNING: UNAUTHORIZED REPLICATION OF THIS DESIGN IS A VIOLATION OF INTERGALACTIC LAW.
-            </div>
-            <div class="credits">
-                DESIGNED IN 2026. SYSTEM READY.
-            </div>
+        <div class="footer-bottom container">
+            <span>© 2026 Червяк VPN · Подземная корпорация добра</span>
+            <span>Сделано в глубоких тоннелях 🪱</span>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const video = document.querySelector(".main-capsule-video");
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        
-        // Функция запуска анимации
-        function initVideoScroll() {
-            if (video.dataset.scrollInitialized) return;
-            video.dataset.scrollInitialized = "true";
-
-            // Убедимся, что длительность видео определена (иначе берем наугад 10 сек, но лучше реальную)
-            const videoDuration = video.duration || 10;
-
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".hero-section",
-                    start: "top top",
-                    end: isMobile ? "+=1200" : "+=4000", // На телефоне короче путь
-                    pin: !isMobile, // Фиксация только на десктопе
-                    scrub: isMobile ? 1.2 : 3, // На телефоне быстрее и легче
-                }
-            });
-
-            // === ГЛАВНОЕ ИЗМЕНЕНИЕ ===
-            // Мы анимируем свойство currentTime у самого видео через GSAP
-            // Это позволяет GSAP самому просчитывать инерцию (scrub)
-            tl.fromTo(video, 
-                { 
-                    currentTime: 0 
-                }, 
-                { 
-                    currentTime: videoDuration, 
-                    ease: "none" // Важно: линейная скорость без ускорений
-                }
-            );
-            
-            ScrollTrigger.refresh();
-        }
-
-        // ПРОВЕРКА ГОТОВНОСТИ ВИДЕО
-        if (video) {
-            if (video.readyState >= 1) {
-                initVideoScroll();
-            } else {
-                video.addEventListener("loadedmetadata", initVideoScroll);
-            }
-        }
-
-        // Анимация появления элементов (оставляем как было)
-        const revealElements = document.querySelectorAll('.step-row, .text-block, .spec-card, .purchase-card');
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            const elementVisible = 100;
-            revealElements.forEach((el) => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add("active");
-                }
-            });
-        };
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll();
-    });
-</script>
+    <script src="script.js"></script>
+</body>
 </html>
