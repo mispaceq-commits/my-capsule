@@ -1,0 +1,26 @@
+<svg class="worm" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="wormGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff6699" />
+            <stop offset="50%" stop-color="#ff2a75" />
+            <stop offset="100%" stop-color="#b30047" />
+        </linearGradient>
+        <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#333" />
+            <stop offset="100%" stop-color="#000" />
+        </linearGradient>
+    </defs>
+    
+    <path d="M 30 160 C 10 90 60 20 140 40 C 180 50 195 90 170 140 C 140 190 70 200 30 160 Z" fill="url(#wormGrad)" />
+    <path d="M 35 155 C 20 95 65 30 135 48" stroke="#ff99bb" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+    
+    <path d="M 60 175 Q 90 190 120 175" stroke="#b30047" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 40 130 Q 60 140 80 135" stroke="#b30047" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+    
+    <rect x="110" y="65" width="35" height="22" rx="6" fill="url(#glassGrad)" />
+    <rect x="155" y="75" width="25" height="18" rx="6" fill="url(#glassGrad)" />
+    <path d="M 145 75 L 155 80" stroke="#111" stroke-width="4" stroke-linecap="round" />
+    <path d="M 115 70 L 140 70" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+    
+    <path d="M 160 110 Q 175 125 185 105" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" />
+</svg>
